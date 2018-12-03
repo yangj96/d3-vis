@@ -1,14 +1,4 @@
-<head>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            inlineMath: [['$','$']]
-            }
-        });
-    </script>
-</head>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
 # d3-vis
 ## 1. FD-Layout
@@ -114,13 +104,13 @@ $$F_{p_i} =  k_P ·(||p_{i−1} − p_i||+ ||p_i − p_{i+1}||) + ∑\limits_{Q�
 
 相应地，算法分别增加了$C_{\alpha}$,$C_{s}$,$C_p$和$C_v$对上述条件进行约束：
 
-$C_{\alpha} = |\cos(\frac{P*Q}{ |P||Q| })|$,
+$$C_{\alpha} = |\cos(\frac{P*Q}{ |P||Q| })|$$,
 
-$C_{s} = \frac{2}{l_{avg}*min(|P|,|Q|) + max(|P|,|Q|)/l_{avg}}$,
+$$C_{s} = \frac{2}{l_{avg}*min(|P|,|Q|) + max(|P|,|Q|)/l_{avg}}$$,
 
-$C_p = l_{avg} / (l_{avg} + ||P_m -Q_m||)$,
+$$C_p = l_{avg} / (l_{avg} + ||P_m -Q_m||)$$,
 
-$V(P, Q) = max(1- \frac{2||P_m-I_m||}{||I_0-I_1||}, 0) \; C_v = min(V(P, Q) ,V( Q, P) )$
+$$V(P, Q) = max(1- \frac{2||P_m-I_m||}{||I_0-I_1||}, 0) \; C_v = min(V(P, Q) ,V( Q, P) )$$
 
 综上，几何兼容参数$C_e = C_{\alpha}*C_{s}*C_p*C_v  \in [0,1]$, 高于该分数的值被视为可兼容的边，因此该参数值设置接近0，edge bundling效果越显著。另一个可以在调用时进行设置的参数是步长，由于在实现时我们固定力相互作用的迭代次数为60次，划分段模拟迭代的周期数为6，因此步长越小，图形会越类似node-link的原始图形，而步长太高会导致边缘过度扭曲。算法复杂度$O(N·M^2·K)$，运行时间较长。
 
